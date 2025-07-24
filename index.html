@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Valutazione e Prenotazione iPhone</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica+Neue:400,700&display=swap">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0; padding: 0; background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 900px; margin: 40px auto; padding: 30px;
+      background-color: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 { font-size: 24px; margin-bottom: 20px; text-align: center; }
+    label { display: block; margin-top: 20px; font-size: 16px; font-weight: 600; }
+    select, input, button { width: 100%; padding: 12px; margin-top: 6px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
+    button { background-color: #0077cc; color: #fff; border: none; font-weight: 700; cursor: pointer; margin-top: 20px; }
+    button:hover { background-color: #005fa3; }
+    .price { font-size: 32px; font-weight: bold; color: #60c100; margin-top: 20px; text-align: center; }
+    .note { text-align: center; margin-top: 8px; font-size: 14px; color: #555; }
+    .map { margin-top: 30px; text-align: center; }
+    iframe.map-frame { width: 100%; height: 300px; border: none; border-radius: 8px; }
+    @media (max-width: 600px) {
+      .container { margin: 20px; padding: 20px; }
+      h1 { font-size: 20px; }
+      .price { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Valutazione e Prenota Appuntamento</h1>
+    <label for="modello">Modello iPhone</label>
+    <select id="modello"><option value="">Seleziona modello</option></select>
+    <label for="capacita">Capacità</label>
+    <select id="capacita" disabled><option value="">Seleziona capacità</option></select>
+    <label for="colore">Colore</label>
+    <select id="colore" disabled><option value="">Seleziona colore</option></select>
+    <div class="price" id="prezzo">€0,00</div>
+    <div class="note">Prezzo stimato (provvisorio)</div>
+    <form name="booking" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="booking">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      <label for="telefono">Telefono</label>
+      <input type="tel" id="telefono" name="telefono" required>
+      <label for="datetime">Data e ora preferita</label>
+      <input type="datetime-local" id="datetime" name="datetime" required>
+      <input type="hidden" id="hidden-modello" name="modello">
+      <input type="hidden" id="hidden-capacita" name="capacita">
+      <input type="hidden" id="hidden-colore" name="colore">
+      <input type="hidden" id="hidden-prezzo" name="prezzo">
+      <button type="submit">Prenota Appuntamento</button>
+    </form>
+    <div class="map">
+      <h2>Dove Siamo</h2>
+      <iframe class="map-frame"
+        src="https://www.google.com/maps?q=Via+Merulana+257,+00185+Roma&output=embed"
+        allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+  <script>
+    const dati = {
+      "iPhone XR": {"64 GB":70,"128 GB":100,"256 GB":120},
+      "iPhone XS": {"64 GB":80,"256 GB":100,"512 GB":130},
+      "iPhone XS Max": {"64 GB":95,"256 GB":115,"512 GB":135},
+      "iPhone 11": {"64 GB":145,"128 GB":175,"256 GB":200},
+      "iPhone 11 Pro": {"64 GB":160,"256 GB":225,"512 GB":270},
+      "iPhone 11 Pro Max": {"64 GB":185,"256 GB":235,"512 GB":275},
+      "iPhone SE (2ª gen)": {"64 GB":65,"128 GB":70,"256 GB":90},
+      "iPhone SE (3ª gen)": {"64 GB":150,"128 GB":190,"256 GB":220},
+      "iPhone 12": {"64 GB":195,"128 GB":225,"256 GB":260},
+      "iPhone 12 mini": {"64 GB":130,"128 GB":170,"256 GB":195},
+      "iPhone 12 Pro": {"128 GB":245,"256 GB":275,"512 GB":295},
+      "iPhone 12 Pro Max": {"128 GB":310,"256 GB":340,"512 GB":350},
+      "iPhone 13": {"128 GB":260,"256 GB":295,"512 GB":350},
+      "iPhone 13 mini": {"128 GB":230,"256 GB":250,"512 GB":290},
+      "iPhone 13 Pro": {"128 GB":345,"256 GB":385,"512 GB":435,"1 TB":495},
+      "iPhone 13 Pro Max": {"128 GB":400,"256 GB":430,"512 GB":455,"1 TB":520},
+      "iPhone 14": {"128 GB":340,"256 GB":390,"512 GB":450},
+      "iPhone 14 Plus": {"128 GB":360,"256 GB":400,"512 GB":460},
+      "iPhone 14 Pro": {"128 GB":460,"256 GB":500,"512 GB":565,"1 TB":600},
+      "iPhone 14 Pro Max": {"128 GB":525,"256 GB":565,"512 GB":605,"1 TB":655},
+      "iPhone 15": {"128 GB":370,"256 GB":450,"512 GB":500},
+      "iPhone 15 Plus": {"128 GB":430,"256 GB":495,"512 GB":570},
+      "iPhone 15 Pro": {"128 GB":540,"256 GB":610,"512 GB":680,"1 TB":765},
+      "iPhone 15 Pro Max": {"256 GB":625,"512 GB":675,"1 TB":785}
+    };
+    const modelloEl = document.getElementById('modello');
+    const capacitaEl = document.getElementById('capacita');
+    const coloreEl = document.getElementById('colore');
+    const prezzoEl = document.getElementById('prezzo');
+    Object.keys(dati).forEach(model => {
+      const opt = document.createElement('option');
+      opt.value = model; opt.textContent = model;
+      modelloEl.appendChild(opt);
+    });
+    modelloEl.addEventListener('change', () => {
+      capacitaEl.innerHTML = '<option value="">Seleziona capacità</option>';
+      capacitaEl.disabled = true;
+      coloreEl.innerHTML = '<option value="">Seleziona colore</option>';
+      coloreEl.disabled = true;
+      prezzoEl.textContent = '€0,00';
+      const caps = dati[modelloEl.value];
+      if (caps) {
+        Object.keys(caps).forEach(cap => {
+          const opt = document.createElement('option');
+          opt.value = cap; opt.textContent = cap;
+          capacitaEl.appendChild(opt);
+        });
+        capacitaEl.disabled = false;
+      }
+    });
+    capacitaEl.addEventListener('change', () => {
+      coloreEl.innerHTML = '<option value="">Seleziona colore</option>';
+      coloreEl.disabled = true;
+      prezzoEl.textContent = '€0,00';
+      Object.keys({"Space Gray":0,"Silver":0,"Gold":0,"Black":0,"White":0,"Blue":0,"Red":0,"Green":0,"Yellow":0,"Coral":0})
+        .forEach(col => {
+          const opt = document.createElement('option');
+          opt.value = col; opt.textContent = col;
+          coloreEl.appendChild(opt);
+        });
+      coloreEl.disabled = false;
+    });
+    coloreEl.addEventListener('change', () => {
+      const base = dati[modelloEl.value][capacitaEl.value] || 0;
+      prezzoEl.textContent = '€' + base.toFixed(2).replace('.',',');
+      document.getElementById('hidden-modello').value = modelloEl.value;
+      document.getElementById('hidden-capacita').value = capacitaEl.value;
+      document.getElementById('hidden-colore').value = coloreEl.value;
+      document.getElementById('hidden-prezzo').value = base.toFixed(2).replace('.',',');
+    });
+  </script>
+</body>
+</html>
