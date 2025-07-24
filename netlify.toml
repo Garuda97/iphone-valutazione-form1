@@ -1,0 +1,6 @@
+[build]
+  command = "echo \"trigger form detection\""
+  publish = "."
+
+[build.processing]
+  skip_processing = false
