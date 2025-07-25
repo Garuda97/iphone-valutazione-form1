@@ -6,23 +6,24 @@
   <title>Valutazione e Prenotazione iPhone</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica+Neue:400,700&display=swap">
   <style>
-    body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
-    .container { max-width: 900px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    h1 { text-align: center; }
-    label { display: block; margin-top: 20px; font-weight: 600; }
-    .checkbox-label { display: flex; align-items: center; justify-content: flex-start; margin-top: 20px; }
-    .checkbox-label input[type="checkbox"] { margin-right: 12px; transform: scale(1.3); }
-    select, input, button { width: 100%; padding: 12px; margin-top: 6px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-    button { background: #0077cc; color: #fff; font-weight: 700; border: none; cursor: pointer; margin-top: 20px; }
-    button:hover { background: #005fa3; }
-    .price { text-align: center; font-size: 32px; font-weight: bold; color: #60c100; margin-top: 20px; }
-    .note { text-align: center; color: #555; margin-top: 8px; }
-    .map { margin-top: 30px; text-align: center; }
-    iframe.map-frame { width: 100%; height: 300px; border: none; border-radius: 8px; }
-    #confirmation { display: none; margin-top: 30px; background: #e9f7ef; padding: 20px; border-radius: 8px; }
-    #langSelect { width: 200px; margin: 0 auto 20px; display: block; }
-    .lang { display: none; }
-    .lang-it { display: inline; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+    .container { max-width:900px; margin:40px auto; padding:30px; background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    h1 { text-align:center; }
+    label { display:block; margin-top:20px; font-weight:600; }
+    .checkbox-label { display:flex; align-items:center; justify-content:flex-start; margin-top:20px; }
+    .checkbox-label input { margin-right:12px; transform:scale(1.3); }
+    select, input, button { width:100%; padding:12px; margin-top:6px; font-size:16px;
+      border:1px solid #ccc; border-radius:8px; box-sizing:border-box;
+      font-family:'Helvetica Neue','Segoe UI Emoji','Segoe UI Symbol',Arial,sans-serif;
+    }
+    button { background:#0077cc; color:#fff; font-weight:700; border:none; cursor:pointer; margin-top:20px; }
+    button:hover { background:#005fa3; }
+    .price { text-align:center; font-size:32px; font-weight:bold; color:#60c100; margin-top:20px; }
+    .note { text-align:center; color:#555; margin-top:8px; }
+    .map { margin-top:30px; text-align:center; }
+    iframe.map-frame { width:100%; height:300px; border:none; border-radius:8px; }
+    #langSelect { width:220px; margin:0 auto 20px; display:block; font-size:18px;}
+    .lang { display:none; }
     @media(max-width:600px){ .container{margin:20px;padding:20px;} .price{font-size:28px;} }
   </style>
 </head>
@@ -35,57 +36,105 @@
       <option value="fr">🇫🇷 Français</option>
       <option value="zh">🇨🇳 中文</option>
     </select>
-
     <h1>
       <span class="lang lang-it">Valutazione e Prenota Appuntamento</span>
-      <span class="lang lang-en">iPhone Valuation & Appointment Booking</span>
+      <span class="lang lang-en">iPhone Valuation &amp; Appointment Booking</span>
       <span class="lang lang-es">Valoración y Reserva de Cita</span>
-      <span class="lang lang-fr">Évaluation et Réservation</span>
-      <span class="lang lang-zh">iPhone 估价和预约</span>
+      <span class="lang lang-fr">Estimation &amp; Prise de Rendez-vous</span>
+      <span class="lang lang-zh">估价和预约</span>
     </h1>
 
     <label for="modello">
-      <span class="lang lang-it">Modello iPhone</span><span class="lang lang-en">Model</span>
+      <span class="lang lang-it">Modello iPhone</span>
+      <span class="lang lang-en">iPhone Model</span>
+      <span class="lang lang-es">Modelo de iPhone</span>
+      <span class="lang lang-fr">Modèle iPhone</span>
+      <span class="lang lang-zh">iPhone型号</span>
     </label>
     <select id="modello"><option value="">Seleziona modello</option></select>
 
     <label for="capacita">
-      <span class="lang lang-it">Capacità</span><span class="lang lang-en">Capacity</span>
+      <span class="lang lang-it">Capacità</span>
+      <span class="lang lang-en">Capacity</span>
+      <span class="lang lang-es">Capacidad</span>
+      <span class="lang lang-fr">Capacité</span>
+      <span class="lang lang-zh">容量</span>
     </label>
     <select id="capacita" disabled><option value="">Seleziona capacità</option></select>
 
     <label for="colore">
-      <span class="lang lang-it">Colore</span><span class="lang lang-en">Color</span>
+      <span class="lang lang-it">Colore</span>
+      <span class="lang lang-en">Color</span>
+      <span class="lang lang-es">Color</span>
+      <span class="lang lang-fr">Couleur</span>
+      <span class="lang lang-zh">颜色</span>
     </label>
     <select id="colore" disabled><option value="">Seleziona colore</option></select>
 
     <div class="price" id="prezzo">€0,00</div>
     <div class="note">
-      <span class="lang lang-it">Prezzo stimato (provvisorio)</span><span class="lang lang-en">Estimated Price</span>
+      <span class="lang lang-it">Prezzo stimato (provvisorio)</span>
+      <span class="lang lang-en">Estimated Price (provisional)</span>
+      <span class="lang lang-es">Precio estimado (provisional)</span>
+      <span class="lang lang-fr">Prix estimé (provisoire)</span>
+      <span class="lang lang-zh">预估价格（临时）</span>
     </div>
 
     <form name="booking" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" id="bookingForm">
       <input type="hidden" name="form-name" value="booking">
 
-      <label for="nome"><span class="lang lang-it">Nome</span><span class="lang lang-en">Name</span></label>
+      <label for="nome">
+        <span class="lang lang-it">Nome</span>
+        <span class="lang lang-en">Name</span>
+        <span class="lang lang-es">Nombre</span>
+        <span class="lang lang-fr">Prénom</span>
+        <span class="lang lang-zh">姓名</span>
+      </label>
       <input type="text" id="nome" name="nome" required>
 
-      <label for="email"><span class="lang lang-it">Email</span><span class="lang lang-en">Email</span></label>
+      <label for="email">
+        <span class="lang lang-it">Email</span>
+        <span class="lang lang-en">Email</span>
+        <span class="lang lang-es">Correo electrónico</span>
+        <span class="lang lang-fr">E-mail</span>
+        <span class="lang lang-zh">邮箱</span>
+      </label>
       <input type="email" id="email" name="email" required>
 
-      <label for="telefono"><span class="lang lang-it">Telefono</span><span class="lang lang-en">Phone</span></label>
+      <label for="telefono">
+        <span class="lang lang-it">Telefono</span>
+        <span class="lang lang-en">Phone</span>
+        <span class="lang lang-es">Teléfono</span>
+        <span class="lang lang-fr">Téléphone</span>
+        <span class="lang lang-zh">电话</span>
+      </label>
       <input type="tel" id="telefono" name="telefono" required>
 
-      <label for="date"><span class="lang lang-it">Data preferita</span><span class="lang lang-en">Date</span></label>
+      <label for="date">
+        <span class="lang lang-it">Data preferita</span>
+        <span class="lang lang-en">Preferred Date</span>
+        <span class="lang lang-es">Fecha preferida</span>
+        <span class="lang lang-fr">Date préférée</span>
+        <span class="lang lang-zh">首选日期</span>
+      </label>
       <input type="date" id="date" name="date" required min="2025-07-25" max="2025-12-31">
 
-      <label for="time"><span class="lang lang-it">Ora preferita</span><span class="lang lang-en">Time</span></label>
+      <label for="time">
+        <span class="lang lang-it">Ora preferita</span>
+        <span class="lang lang-en">Preferred Time</span>
+        <span class="lang lang-es">Hora preferida</span>
+        <span class="lang lang-fr">Heure préférée</span>
+        <span class="lang lang-zh">首选时间</span>
+      </label>
       <input type="time" id="time" name="time" required>
 
       <label class="checkbox-label">
         <input type="checkbox" id="terms" name="terms" required>
         <span class="lang lang-it">Ho letto e accetto i <a href="/privacy" target="_blank">Termini e Privacy</a></span>
-        <span class="lang lang-en">I have read and agree to the <a href="/privacy" target="_blank">Terms & Privacy</a></span>
+        <span class="lang lang-en">I have read and agree to the <a href="/privacy" target="_blank">Terms &amp; Privacy</a></span>
+        <span class="lang lang-es">He leído y acepto los <a href="/privacy" target="_blank">Términos y la Privacidad</a></span>
+        <span class="lang lang-fr">J'ai lu et j'accepte les <a href="/privacy" target="_blank">Termes et la confidentialité</a></span>
+        <span class="lang lang-zh">我已阅读并同意 <a href="/privacy" target="_blank">条款和隐私政策</a></span>
       </label>
 
       <input type="hidden" id="hidden-modello" name="modello">
@@ -94,86 +143,236 @@
       <input type="hidden" id="hidden-prezzo" name="prezzo">
       <input type="hidden" id="hidden-datetime" name="dateTime">
 
-      <button type="submit"><span class="lang lang-it">Prenota Appuntamento</span><span class="lang lang-en">Book Appointment</span></button>
+      <button type="submit">
+        <span class="lang lang-it">Prenota Appuntamento</span>
+        <span class="lang lang-en">Book Appointment</span>
+        <span class="lang lang-es">Reservar cita</span>
+        <span class="lang lang-fr">Prendre rendez-vous</span>
+        <span class="lang lang-zh">预约</span>
+      </button>
     </form>
 
     <div class="map">
-      <h2><span class="lang lang-it">Dove Siamo</span><span class="lang lang-en">Where We Are</span></h2>
-      <iframe class="map-frame" src="https://www.google.com/maps?q=Via+Merulana+257,+00185+Roma&output=embed" loading="lazy"></iframe>
+      <h2>
+        <span class="lang lang-it">Dove Siamo</span>
+        <span class="lang lang-en">Where We Are</span>
+        <span class="lang lang-es">Dónde estamos</span>
+        <span class="lang lang-fr">Où nous sommes</span>
+        <span class="lang lang-zh">我们的位置</span>
+      </h2>
+      <iframe class="map-frame" src="https://www.google.com/maps?q=Via+Merulana+257,+00185+Roma&output=embed" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
-
   <script>
-    // initial lang display
+    // Language
     const langSelect = document.getElementById('langSelect');
-    document.addEventListener('DOMContentLoaded', ()=> {
-      langSelect.value = 'it';
-      langSelect.dispatchEvent(new Event('change'));
-    });
-    langSelect.addEventListener('change', ()=> {
+    document.addEventListener('DOMContentLoaded', () => { langSelect.value='it'; langSelect.dispatchEvent(new Event('change')); });
+    langSelect.addEventListener('change', () => {
       document.querySelectorAll('.lang').forEach(el=>el.style.display='none');
       document.querySelectorAll('.lang-'+langSelect.value).forEach(el=>el.style.display='inline');
     });
 
-    // data
+    // Data
     const dati = {
-      "iPhone XR":{"64 GB":70,"128 GB":100,"256 GB":120},
-      "iPhone XS":{"64 GB":80,"256 GB":100,"512 GB":130},
-      "iPhone XS Max":{"64 GB":95,"256 GB":115,"512 GB":135},
-      "iPhone 11":{"64 GB":145,"128 GB":175,"256 GB":200},
-      "iPhone 11 Pro":{"64 GB":160,"256 GB":225,"512 GB":270},
-      "iPhone 11 Pro Max":{"64 GB":185,"256 GB":235,"512 GB":275},
-      "iPhone SE (2ª gen)":{"64 GB":65,"128 GB":70,"256 GB":90},
-      "iPhone SE (3ª gen)":{"64 GB":150,"128 GB":190,"256 GB":220},
-      "iPhone 12":{"64 GB":195,"128 GB":225,"256 GB":260},
-      "iPhone 12 mini":{"64 GB":130,"128 GB":170,"256 GB":195},
-      "iPhone 12 Pro":{"128 GB":245,"256 GB":275,"512 GB":295},
-      "iPhone 12 Pro Max":{"128 GB":310,"256 GB":340,"512 GB":350},
-      "iPhone 13":{"128 GB":260,"256 GB":295,"512 GB":350},
-      "iPhone 13 mini":{"128 GB":230,"256 GB":250,"512 GB":290},
-      "iPhone 13 Pro":{"128 GB":345,"256 GB":385,"512 GB":435,"1 TB":495},
-      "iPhone 13 Pro Max":{"128 GB":400,"256 GB":430,"512 GB":455,"1 TB":520},
-      "iPhone 14":{"128 GB":340,"256 GB":390,"512 GB":450},
-      "iPhone 14 Plus":{"128 GB":360,"256 GB":400,"512 GB":460},
-      "iPhone 14 Pro":{"128 GB":460,"256 GB":500,"512 GB":565,"1 TB":600},
-      "iPhone 14 Pro Max":{"128 GB":525,"256 GB":565,"512 GB":605,"1 TB":655},
-      "iPhone 15":{"128 GB":370,"256 GB":450,"512 GB":500},
-      "iPhone 15 Plus":{"128 GB":430,"256 GB":495,"512 GB":570},
-      "iPhone 15 Pro":{"128 GB":540,"256 GB":610,"512 GB":680,"1 TB":765},
-      "iPhone 15 Pro Max":{"256 GB":625,"512 GB":675,"1 TB":785}
+  "iPhone XR": {
+    "64 GB":   {"Black":70,"White":70,"Blue":70,"Yellow":70,"Coral":70,"PRODUCT(RED)":70},
+    "128 GB":  {"Black":100,"White":100,"Blue":100,"Yellow":100,"Coral":100,"PRODUCT(RED)":100},
+    "256 GB":  {"Black":120,"White":120,"Blue":120,"Yellow":120,"Coral":120,"PRODUCT(RED)":120}
+  },
+  "iPhone XS": {
+    "64 GB":   {"Space Gray":80,"Silver":80,"Gold":80},
+    "256 GB":  {"Space Gray":100,"Silver":100,"Gold":100},
+    "512 GB":  {"Space Gray":130,"Silver":130,"Gold":130}
+  },
+  "iPhone XS Max": {
+    "64 GB":   {"Space Gray":95,"Silver":95,"Gold":95},
+    "256 GB":  {"Space Gray":115,"Silver":115,"Gold":115},
+    "512 GB":  {"Space Gray":135,"Silver":135,"Gold":135}
+  },
+  "iPhone 11": {
+    "64 GB":   {"Black":145,"White":145,"Green":145,"Yellow":145,"Purple":145,"PRODUCT(RED)":145},
+    "128 GB":  {"Black":175,"White":175,"Green":175,"Yellow":175,"Purple":175,"PRODUCT(RED)":175},
+    "256 GB":  {"Black":200,"White":200,"Green":200,"Yellow":200,"Purple":200,"PRODUCT(RED)":200}
+  },
+  "iPhone 11 Pro": {
+    "64 GB":   {"Midnight Green":160,"Space Gray":160,"Silver":160,"Gold":160},
+    "256 GB":  {"Midnight Green":225,"Space Gray":225,"Silver":225,"Gold":225},
+    "512 GB":  {"Midnight Green":270,"Space Gray":270,"Silver":270,"Gold":270}
+  },
+  "iPhone 11 Pro Max": {
+    "64 GB":   {"Midnight Green":185,"Space Gray":185,"Silver":185,"Gold":185},
+    "256 GB":  {"Midnight Green":235,"Space Gray":235,"Silver":235,"Gold":235},
+    "512 GB":  {"Midnight Green":275,"Space Gray":275,"Silver":275,"Gold":275}
+  },
+  "iPhone SE (2ª gen)": {
+    "64 GB":   {"Black":65,"White":65,"PRODUCT(RED)":65},
+    "128 GB":  {"Black":70,"White":70,"PRODUCT(RED)":70},
+    "256 GB":  {"Black":90,"White":90,"PRODUCT(RED)":90}
+  },
+  "iPhone SE (3ª gen)": {
+    "64 GB":   {"Midnight":150,"Starlight":150,"PRODUCT(RED)":150},
+    "128 GB":  {"Midnight":190,"Starlight":190,"PRODUCT(RED)":190},
+    "256 GB":  {"Midnight":220,"Starlight":220,"PRODUCT(RED)":220}
+  },
+  "iPhone 12": {
+    "64 GB":   {"Black":195,"White":195,"Green":195,"Blue":195,"Purple":195,"PRODUCT(RED)":195},
+    "128 GB":  {"Black":225,"White":225,"Green":225,"Blue":225,"Purple":225,"PRODUCT(RED)":225},
+    "256 GB":  {"Black":260,"White":260,"Green":260,"Blue":260,"Purple":260,"PRODUCT(RED)":260}
+  },
+  "iPhone 12 mini": {
+    "64 GB":   {"Black":130,"White":130,"Green":130,"Blue":130,"Purple":130,"PRODUCT(RED)":130},
+    "128 GB":  {"Black":170,"White":170,"Green":170,"Blue":170,"Purple":170,"PRODUCT(RED)":170},
+    "256 GB":  {"Black":195,"White":195,"Green":195,"Blue":195,"Purple":195,"PRODUCT(RED)":195}
+  },
+  "iPhone 12 Pro": {
+    "128 GB":  {"Graphite":245,"Silver":245,"Gold":245,"Pacific Blue":245},
+    "256 GB":  {"Graphite":275,"Silver":275,"Gold":275,"Pacific Blue":275},
+    "512 GB":  {"Graphite":295,"Silver":295,"Gold":295,"Pacific Blue":295}
+  },
+  "iPhone 12 Pro Max": {
+    "128 GB":  {"Graphite":310,"Silver":310,"Gold":310,"Pacific Blue":310},
+    "256 GB":  {"Graphite":340,"Silver":340,"Gold":340,"Pacific Blue":340},
+    "512 GB":  {"Graphite":350,"Silver":350,"Gold":350,"Pacific Blue":350}
+  },
+  "iPhone 13": {
+    "128 GB":  {"Midnight":260,"Starlight":260,"Pink":260,"Blue":260,"Green":260,"PRODUCT(RED)":260},
+    "256 GB":  {"Midnight":295,"Starlight":295,"Pink":295,"Blue":295,"Green":295,"PRODUCT(RED)":295},
+    "512 GB":  {"Midnight":350,"Starlight":350,"Pink":350,"Blue":350,"Green":350,"PRODUCT(RED)":350}
+  },
+  "iPhone 13 mini": {
+    "128 GB":  {"Midnight":230,"Starlight":230,"Pink":230,"Blue":230,"Green":230,"PRODUCT(RED)":230},
+    "256 GB":  {"Midnight":250,"Starlight":250,"Pink":250,"Blue":250,"Green":250,"PRODUCT(RED)":250},
+    "512 GB":  {"Midnight":290,"Starlight":290,"Pink":290,"Blue":290,"Green":290,"PRODUCT(RED)":290}
+  },
+  "iPhone 13 Pro": {
+    "128 GB":  {"Graphite":345,"Gold":345,"Silver":345,"Sierra Blue":345,"Alpine Green":345},
+    "256 GB":  {"Graphite":385,"Gold":385,"Silver":385,"Sierra Blue":385,"Alpine Green":385},
+    "512 GB":  {"Graphite":435,"Gold":435,"Silver":435,"Sierra Blue":435,"Alpine Green":435},
+    "1 TB":    {"Graphite":495,"Gold":495,"Silver":495,"Sierra Blue":495,"Alpine Green":495}
+  },
+  "iPhone 13 Pro Max": {
+    "128 GB":  {"Graphite":400,"Gold":400,"Silver":400,"Sierra Blue":400,"Alpine Green":400},
+    "256 GB":  {"Graphite":430,"Gold":430,"Silver":430,"Sierra Blue":430,"Alpine Green":430},
+    "512 GB":  {"Graphite":455,"Gold":455,"Silver":455,"Sierra Blue":455,"Alpine Green":455},
+    "1 TB":    {"Graphite":520,"Gold":520,"Silver":520,"Sierra Blue":520,"Alpine Green":520}
+  },
+  "iPhone 14": {
+    "128 GB":  {"Midnight":340,"Starlight":340,"Blue":340,"Purple":340,"Yellow":340,"PRODUCT(RED)":340},
+    "256 GB":  {"Midnight":390,"Starlight":390,"Blue":390,"Purple":390,"Yellow":390,"PRODUCT(RED)":390},
+    "512 GB":  {"Midnight":450,"Starlight":450,"Blue":450,"Purple":450,"Yellow":450,"PRODUCT(RED)":450}
+  },
+  "iPhone 14 Plus": {
+    "128 GB":  {"Midnight":360,"Starlight":360,"Blue":360,"Purple":360,"Yellow":360,"PRODUCT(RED)":360},
+    "256 GB":  {"Midnight":400,"Starlight":400,"Blue":400,"Purple":400,"Yellow":400,"PRODUCT(RED)":400},
+    "512 GB":  {"Midnight":460,"Starlight":460,"Blue":460,"Purple":460,"Yellow":460,"PRODUCT(RED)":460}
+  },
+  "iPhone 14 Pro": {
+    "128 GB":  {"Space Black":460,"Silver":460,"Gold":460,"Deep Purple":460},
+    "256 GB":  {"Space Black":500,"Silver":500,"Gold":500,"Deep Purple":500},
+    "512 GB":  {"Space Black":565,"Silver":565,"Gold":565,"Deep Purple":565},
+    "1 TB":    {"Space Black":600,"Silver":600,"Gold":600,"Deep Purple":600}
+  },
+  "iPhone 14 Pro Max": {
+    "128 GB":  {"Space Black":525,"Silver":525,"Gold":525,"Deep Purple":525},
+    "256 GB":  {"Space Black":565,"Silver":565,"Gold":565,"Deep Purple":565},
+    "512 GB":  {"Space Black":605,"Silver":605,"Gold":605,"Deep Purple":605},
+    "1 TB":    {"Space Black":655,"Silver":655,"Gold":655,"Deep Purple":655}
+  },
+  "iPhone 15": {
+    "128 GB":  {"Black":370,"Blue":370,"Green":370,"Pink":370,"Yellow":370},
+    "256 GB":  {"Black":450,"Blue":450,"Green":450,"Pink":450,"Yellow":450},
+    "512 GB":  {"Black":500,"Blue":500,"Green":500,"Pink":500,"Yellow":500}
+  },
+  "iPhone 15 Plus": {
+    "128 GB":  {"Black":430,"Blue":430,"Green":430,"Pink":430,"Yellow":430},
+    "256 GB":  {"Black":495,"Blue":495,"Green":495,"Pink":495,"Yellow":495},
+    "512 GB":  {"Black":570,"Blue":570,"Green":570,"Pink":570,"Yellow":570}
+  },
+  "iPhone 15 Pro": {
+    "128 GB":  {"Black Titanium":540,"White Titanium":540,"Blue Titanium":540,"Natural Titanium":540},
+    "256 GB":  {"Black Titanium":610,"White Titanium":610,"Blue Titanium":610,"Natural Titanium":610},
+    "512 GB":  {"Black Titanium":680,"White Titanium":680,"Blue Titanium":680,"Natural Titanium":680},
+    "1 TB":    {"Black Titanium":765,"White Titanium":765,"Blue Titanium":765,"Natural Titanium":765}
+  },
+  "iPhone 15 Pro Max": {
+    "256 GB":  {"Black Titanium":625,"White Titanium":625,"Blue Titanium":625,"Natural Titanium":625},
+    "512 GB":  {"Black Titanium":675,"White Titanium":675,"Blue Titanium":675,"Natural Titanium":675},
+    "1 TB":    {"Black Titanium":785,"White Titanium":785,"Blue Titanium":785,"Natural Titanium":785}
+  },
+  "iPhone 16": {
+    "128 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
+    "256 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
+    "512 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"}
+  },
+  "iPhone 16 Plus": {
+    "128 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
+    "256 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
+    "512 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"}
+  },
+  "iPhone 16 Pro": {
+    "128 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
+    "256 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
+    "512 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
+    "1 TB":    {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"}
+  },
+  "iPhone 16 Pro Max": {
+    "256 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
+    "512 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
+    "1 TB":    {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"}
+  }
     };
 
-    const m = document.getElementById('modello'),
-          c = document.getElementById('capacita'),
-          col = document.getElementById('colore'),
-          p = document.getElementById('prezzo');
-    Object.keys(dati).forEach(model=>{
-      let o=document.createElement('option');o.value=model;o.textContent=model;m.append(o);
+    // Dropdown population
+    const modelloEl = document.getElementById('modello'),
+          capacitaEl = document.getElementById('capacita'),
+          coloreEl = document.getElementById('colore'),
+          prezzoEl = document.getElementById('prezzo');
+
+    Object.keys(dati).forEach(model => {
+      let o = document.createElement('option'); o.value = model; o.textContent = model;
+      modelloEl.appendChild(o);
     });
-    m.onchange=()=>{
-      c.innerHTML='<option value="">Seleziona capacità</option>';c.disabled=true;
-      col.innerHTML='<option value="">Seleziona colore</option>';col.disabled=true;
-      p.textContent='€0,00';
-      if(dati[m.value]){
-        Object.keys(dati[m.value]).forEach(cap=>{
-          let o=document.createElement('option');o.value=cap;o.textContent=cap;c.append(o);
+
+    modelloEl.onchange = () => {
+      capacitaEl.innerHTML = '<option value="">Seleziona capacità</option>'; capacitaEl.disabled = true;
+      coloreEl.innerHTML = '<option value="">Seleziona colore</option>'; coloreEl.disabled = true;
+      prezzoEl.textContent = '€0,00';
+      if (dati[modelloEl.value]) {
+        Object.keys(dati[modelloEl.value]).forEach(cap => {
+          let o = document.createElement('option'); o.value = cap; o.textContent = cap;
+          capacitaEl.appendChild(o);
         });
-        c.disabled=false;
+        capacitaEl.disabled = false;
       }
     };
-    c.onchange=()=>{
-      col.innerHTML='<option value="">Seleziona colore</option>';col.disabled=true;p.textContent='€0,00';
-      ['Space Gray','Silver','Gold','Black','White','Blue','Red','Green','Yellow','Coral']
-      .forEach(color=>{let o=document.createElement('option');o.value=color;o.textContent=color;col.append(o);});
-      col.disabled=false;
+
+    capacitaEl.onchange = () => {
+      coloreEl.innerHTML = '<option value="">Seleziona colore</option>'; coloreEl.disabled = true; prezzoEl.textContent='€0,00';
+      if(dati[modelloEl.value] && dati[modelloEl.value][capacitaEl.value]){
+        let cols = dati[modelloEl.value][capacitaEl.value];
+        Object.keys(cols).forEach(color => {
+          let o = document.createElement('option'); o.value = color; o.textContent = color;
+          coloreEl.appendChild(o);
+        });
+        coloreEl.disabled = false;
+      }
     };
-    col.onchange=()=>{
-      let base=dati[m.value][c.value]||0;
-      p.textContent='€'+base.toFixed(2).replace('.',',');
-      document.getElementById('hidden-modello').value=m.value;
-      document.getElementById('hidden-capacita').value=c.value;
-      document.getElementById('hidden-colore').value=col.value;
-      document.getElementById('hidden-prezzo').value=base.toFixed(2).replace('.',',');
+
+    coloreEl.onchange = () => {
+      let price = dati[modelloEl.value]?.[capacitaEl.value]?.[coloreEl.value];
+      if (typeof price === "number") {
+        prezzoEl.textContent = '€' + price.toFixed(2).replace('.',',');
+        document.getElementById('hidden-prezzo').value = price.toFixed(2).replace('.',',');
+      } else if (typeof price === "string") {
+        prezzoEl.textContent = price === "COMING SOON" ? "PROSSIMAMENTE" : price;
+        document.getElementById('hidden-prezzo').value = price;
+      } else {
+        prezzoEl.textContent = '€0,00';
+        document.getElementById('hidden-prezzo').value = '0,00';
+      }
+      document.getElementById('hidden-modello').value = modelloEl.value;
+      document.getElementById('hidden-capacita').value = capacitaEl.value;
+      document.getElementById('hidden-colore').value = coloreEl.value;
     };
   </script>
 </body>
