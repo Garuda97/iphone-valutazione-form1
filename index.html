@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valutazione e Prenotazione iPhone</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica+Neue:400,700&display=swap">
   <style>
@@ -10,8 +10,10 @@
     .container { max-width: 900px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     h1 { text-align: center; }
     label { display: block; margin-top: 20px; font-weight: 600; }
+    .checkbox-label { display: flex; align-items: center; justify-content: flex-start; margin-top: 20px; }
+    .checkbox-label input[type="checkbox"] { margin-right: 12px; transform: scale(1.3); }
     select, input, button { width: 100%; padding: 12px; margin-top: 6px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-    button { background: #0077cc; color: #fff; font-weight: 700; border: none; cursor: pointer; }
+    button { background: #0077cc; color: #fff; font-weight: 700; border: none; cursor: pointer; margin-top: 20px; }
     button:hover { background: #005fa3; }
     .price { text-align: center; font-size: 32px; font-weight: bold; color: #60c100; margin-top: 20px; }
     .note { text-align: center; color: #555; margin-top: 8px; }
@@ -20,15 +22,12 @@
     #confirmation { display: none; margin-top: 30px; background: #e9f7ef; padding: 20px; border-radius: 8px; }
     #langSelect { width: 200px; margin: 0 auto 20px; display: block; }
     .lang { display: none; }
-    .share-btns a { display: inline-block; margin: 5px; padding: 10px; border-radius: 4px; text-decoration: none; color: #fff; }
-    .share-btns a.whatsapp { background: #25D366; }
-    .share-btns a.facebook { background: #3b5998; }
+    .lang-it { display: inline; }
     @media(max-width:600px){ .container{margin:20px;padding:20px;} .price{font-size:28px;} }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Language Selector -->
     <select id="langSelect">
       <option value="it">🇮🇹 Italiano</option>
       <option value="en">🇬🇧 English</option>
@@ -37,7 +36,6 @@
       <option value="zh">🇨🇳 中文</option>
     </select>
 
-    <!-- Title -->
     <h1>
       <span class="lang lang-it">Valutazione e Prenota Appuntamento</span>
       <span class="lang lang-en">iPhone Valuation & Appointment Booking</span>
@@ -46,78 +44,48 @@
       <span class="lang lang-zh">iPhone 估价和预约</span>
     </h1>
 
-    <!-- Valuation Module -->
     <label for="modello">
-      <span class="lang lang-it">Modello iPhone</span>
-      <span class="lang lang-en">iPhone Model</span>
-      <span class="lang lang-es">Modelo iPhone</span>
-      <span class="lang lang-fr">Modèle iPhone</span>
-      <span class="lang lang-zh">iPhone 型号</span>
+      <span class="lang lang-it">Modello iPhone</span><span class="lang lang-en">Model</span>
     </label>
-    <select id="modello"><option value="">—</option></select>
+    <select id="modello"><option value="">Seleziona modello</option></select>
 
     <label for="capacita">
-      <span class="lang lang-it">Capacità</span>
-      <span class="lang lang-en">Capacity</span>
-      <span class="lang lang-es">Capacidad</span>
-      <span class="lang lang-fr">Capacité</span>
-      <span class="lang lang-zh">容量</span>
+      <span class="lang lang-it">Capacità</span><span class="lang lang-en">Capacity</span>
     </label>
-    <select id="capacita" disabled><option value="">—</option></select>
+    <select id="capacita" disabled><option value="">Seleziona capacità</option></select>
 
     <label for="colore">
-      <span class="lang lang-it">Colore</span>
-      <span class="lang lang-en">Color</span>
-      <span class="lang lang-es">Color</span>
-      <span class="lang lang-fr">Couleur</span>
-      <span class="lang lang-zh">颜色</span>
+      <span class="lang lang-it">Colore</span><span class="lang lang-en">Color</span>
     </label>
-    <select id="colore" disabled><option value="">—</option></select>
+    <select id="colore" disabled><option value="">Seleziona colore</option></select>
 
     <div class="price" id="prezzo">€0,00</div>
     <div class="note">
-      <span class="lang lang-it">Prezzo stimato (provvisorio)</span>
-      <span class="lang lang-en">Estimated Price (provisional)</span>
-      <span class="lang lang-es">Precio estimado (provisional)</span>
-      <span class="lang lang-fr">Prix estimé (provisoire)</span>
-      <span class="lang lang-zh">预估价格（暂定）</span>
+      <span class="lang lang-it">Prezzo stimato (provvisorio)</span><span class="lang lang-en">Estimated Price</span>
     </div>
 
-    <!-- Booking Form -->
     <form name="booking" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" id="bookingForm">
       <input type="hidden" name="form-name" value="booking">
-      <label for="nome">
-        <span class="lang lang-it">Nome</span><span class="lang lang-en">Name</span><span class="lang lang-es">Nombre</span><span class="lang lang-fr">Nom</span><span class="lang lang-zh">姓名</span>
-      </label>
+
+      <label for="nome"><span class="lang lang-it">Nome</span><span class="lang lang-en">Name</span></label>
       <input type="text" id="nome" name="nome" required>
 
-      <label for="email">
-        <span class="lang lang-it">Email</span><span class="lang lang-en">Email</span><span class="lang lang-es">Correo</span><span class="lang lang-fr">Email</span><span class="lang lang-zh">电子邮件</span>
-      </label>
+      <label for="email"><span class="lang lang-it">Email</span><span class="lang lang-en">Email</span></label>
       <input type="email" id="email" name="email" required>
 
-      <label for="telefono">
-        <span class="lang lang-it">Telefono</span><span class="lang lang-en">Phone</span><span class="lang lang-es">Teléfono</span><span class="lang lang-fr">Téléphone</span><span class="lang lang-zh">电话</span>
-      </label>
+      <label for="telefono"><span class="lang lang-it">Telefono</span><span class="lang lang-en">Phone</span></label>
       <input type="tel" id="telefono" name="telefono" required>
 
-      <label for="date">
-        <span class="lang lang-it">Data preferita</span><span class="lang lang-en">Preferred Date</span><span class="lang lang-es">Fecha preferida</span><span class="lang lang-fr">Date préférée</span><span class="lang lang-zh">首选日期</span>
-      </label>
+      <label for="date"><span class="lang lang-it">Data preferita</span><span class="lang lang-en">Date</span></label>
       <input type="date" id="date" name="date" required min="2025-07-25" max="2025-12-31">
 
-      <label for="time">
-        <span class="lang lang-it">Ora preferita</span><span class="lang lang-en">Preferred Time</span><span class="lang lang-es">Hora preferida</span><span class="lang lang-fr">Heure préférée</span><span class="lang lang-zh">首选时间</span>
-      </label>
+      <label for="time"><span class="lang lang-it">Ora preferita</span><span class="lang lang-en">Time</span></label>
       <input type="time" id="time" name="time" required>
 
-      <label>
+      <label class="checkbox-label">
         <input type="checkbox" id="terms" name="terms" required>
         <span class="lang lang-it">Ho letto e accetto i <a href="/privacy" target="_blank">Termini e Privacy</a></span>
         <span class="lang lang-en">I have read and agree to the <a href="/privacy" target="_blank">Terms & Privacy</a></span>
-        <span class="lang lang-es">He leído y acepto los <a href="/privacy" target="_blank">Términos y Privacidad</a></span>
-        <span class="lang lang-fr">J'ai lu et j'accepte les <a href="/privacy" target="_blank">Termes et la Politique</a></span>
-        <span class="lang lang-zh">我已阅读并同意<a href="/privacy" target="_blank">条款和隐私</a></span>
       </label>
 
       <input type="hidden" id="hidden-modello" name="modello">
@@ -126,114 +94,87 @@
       <input type="hidden" id="hidden-prezzo" name="prezzo">
       <input type="hidden" id="hidden-datetime" name="dateTime">
 
-      <button type="submit">
-        <span class="lang lang-it">Prenota Appuntamento</span><span class="lang lang-en">Book Appointment</span><span class="lang lang-es">Reservar cita</span><span class="lang lang-fr">Réserver</span><span class="lang lang-zh">预约</span>
-      </button>
+      <button type="submit"><span class="lang lang-it">Prenota Appuntamento</span><span class="lang lang-en">Book Appointment</span></button>
     </form>
 
-    <!-- Confirmation -->
-    <div id="confirmation">
-      <h2>
-        <span class="lang lang-it">Conferma Prenotazione</span><span class="lang lang-en">Booking Confirmation</span><span class="lang lang-es">Confirmación de reserva</span><span class="lang lang-fr">Confirmation de réservation</span><span class="lang lang-zh">预约确认</span>
-      </h2>
-      <p id="confDetails"></p>
-      <button id="downloadPdf">
-        <span class="lang lang-it">Scarica Ricevuta (PDF)</span><span class="lang lang-en">Download Receipt (PDF)</span><span class="lang lang-es">Descargar recibo (PDF)</span><span class="lang lang-fr">Télécharger reçu (PDF)</span><span class="lang lang-zh">下载收据 (PDF)</span>
-      </button>
-      <div class="share-btns">
-        <a href="#" id="whatsappShare" class="whatsapp">WhatsApp</a>
-        <a href="#" id="facebookShare" class="facebook">Facebook</a>
-      </div>
-    </div>
-
-    <!-- Map -->
     <div class="map">
-      <h2>
-        <span class="lang lang-it">Dove Siamo</span><span class="lang lang-en">Where We Are</span><span class="lang lang-es">Dónde estamos</span><span class="lang lang-fr">Où nous sommes</span><span class="lang lang-zh">我们在哪</span>
-      </h2>
-      <iframe class="map-frame" src="https://www.google.com/maps?q=Via+Merulana+257,+00185+Roma&output=embed" allowfullscreen loading="lazy"></iframe>
+      <h2><span class="lang lang-it">Dove Siamo</span><span class="lang lang-en">Where We Are</span></h2>
+      <iframe class="map-frame" src="https://www.google.com/maps?q=Via+Merulana+257,+00185+Roma&output=embed" loading="lazy"></iframe>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   <script>
-    // Language toggle
+    // initial lang display
     const langSelect = document.getElementById('langSelect');
-    langSelect.addEventListener('change', () => {
-      document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
-      document.querySelectorAll('.lang-' + langSelect.value).forEach(el => el.style.display = 'inline');
+    document.addEventListener('DOMContentLoaded', ()=> {
+      langSelect.value = 'it';
+      langSelect.dispatchEvent(new Event('change'));
+    });
+    langSelect.addEventListener('change', ()=> {
+      document.querySelectorAll('.lang').forEach(el=>el.style.display='none');
+      document.querySelectorAll('.lang-'+langSelect.value).forEach(el=>el.style.display='inline');
     });
 
-    // Data for iPhones
+    // data
     const dati = {
-      "iPhone XR": {"64 GB":70,"128 GB":100,"256 GB":120},
-      "iPhone XS": {"64 GB":80,"256 GB":100,"512 GB":130},
-      "iPhone XS Max": {"64 GB":95,"256 GB":115,"512 GB":135},
-      "iPhone 11": {"64 GB":145,"128 GB":175,"256 GB":200},
-      "iPhone 11 Pro": {"64 GB":160,"256 GB":225,"512 GB":270},
-      "iPhone 11 Pro Max": {"64 GB":185,"256 GB":235,"512 GB":275},
-      "iPhone SE (2ª gen)": {"64 GB":65,"128 GB":70,"256 GB":90},
-      "iPhone SE (3ª gen)": {"64 GB":150,"128 GB":190,"256 GB":220},
-      "iPhone 12": {"64 GB":195,"128 GB":225,"256 GB":260},
-      "iPhone 12 mini": {"64 GB":130,"128 GB":170,"256 GB":195},
-      "iPhone 12 Pro": {"128 GB":245,"256 GB":275,"512 GB":295},
-      "iPhone 12 Pro Max": {"128 GB":310,"256 GB":340,"512 GB":350},
-      "iPhone 13": {"128 GB":260,"256 GB":295,"512 GB":350},
-      "iPhone 13 mini": {"128 GB":230,"256 GB":250,"512 GB":290},
-      "iPhone 13 Pro": {"128 GB":345,"256 GB":385,"512 GB":435,"1 TB":495},
-      "iPhone 13 Pro Max": {"128 GB":400,"256 GB":430,"512 GB":455,"1 TB":520},
-      "iPhone 14": {"128 GB":340,"256 GB":390,"512 GB":450},
-      "iPhone 14 Plus": {"128 GB":360,"256 GB":400,"512 GB":460},
-      "iPhone 14 Pro": {"128 GB":460,"256 GB":500,"512 GB":565,"1 TB":600},
-      "iPhone 14 Pro Max": {"128 GB":525,"256 GB":565,"512 GB":605,"1 TB":655},
-      "iPhone 15": {"128 GB":370,"256 GB":450,"512 GB":500},
-      "iPhone 15 Plus": {"128 GB":430,"256 GB":495,"512 GB":570},
-      "iPhone 15 Pro": {"128 GB":540,"256 GB":610,"512 GB":680,"1 TB":765},
-      "iPhone 15 Pro Max": {"256 GB":625,"512 GB":675,"1 TB":785}
+      "iPhone XR":{"64 GB":70,"128 GB":100,"256 GB":120},
+      "iPhone XS":{"64 GB":80,"256 GB":100,"512 GB":130},
+      "iPhone XS Max":{"64 GB":95,"256 GB":115,"512 GB":135},
+      "iPhone 11":{"64 GB":145,"128 GB":175,"256 GB":200},
+      "iPhone 11 Pro":{"64 GB":160,"256 GB":225,"512 GB":270},
+      "iPhone 11 Pro Max":{"64 GB":185,"256 GB":235,"512 GB":275},
+      "iPhone SE (2ª gen)":{"64 GB":65,"128 GB":70,"256 GB":90},
+      "iPhone SE (3ª gen)":{"64 GB":150,"128 GB":190,"256 GB":220},
+      "iPhone 12":{"64 GB":195,"128 GB":225,"256 GB":260},
+      "iPhone 12 mini":{"64 GB":130,"128 GB":170,"256 GB":195},
+      "iPhone 12 Pro":{"128 GB":245,"256 GB":275,"512 GB":295},
+      "iPhone 12 Pro Max":{"128 GB":310,"256 GB":340,"512 GB":350},
+      "iPhone 13":{"128 GB":260,"256 GB":295,"512 GB":350},
+      "iPhone 13 mini":{"128 GB":230,"256 GB":250,"512 GB":290},
+      "iPhone 13 Pro":{"128 GB":345,"256 GB":385,"512 GB":435,"1 TB":495},
+      "iPhone 13 Pro Max":{"128 GB":400,"256 GB":430,"512 GB":455,"1 TB":520},
+      "iPhone 14":{"128 GB":340,"256 GB":390,"512 GB":450},
+      "iPhone 14 Plus":{"128 GB":360,"256 GB":400,"512 GB":460},
+      "iPhone 14 Pro":{"128 GB":460,"256 GB":500,"512 GB":565,"1 TB":600},
+      "iPhone 14 Pro Max":{"128 GB":525,"256 GB":565,"512 GB":605,"1 TB":655},
+      "iPhone 15":{"128 GB":370,"256 GB":450,"512 GB":500},
+      "iPhone 15 Plus":{"128 GB":430,"256 GB":495,"512 GB":570},
+      "iPhone 15 Pro":{"128 GB":540,"256 GB":610,"512 GB":680,"1 TB":765},
+      "iPhone 15 Pro Max":{"256 GB":625,"512 GB":675,"1 TB":785}
     };
 
-    const modelloEl = document.getElementById('modello');
-    const capacitaEl = document.getElementById('capacita');
-    const coloreEl = document.getElementById('colore');
-    const prezzoEl = document.getElementById('prezzo');
-
-    // Populate models
-    Object.keys(dati).forEach(model => {
-      const opt = document.createElement('option');
-      opt.value = model; opt.textContent = model;
-      modelloEl.appendChild(opt);
+    const m = document.getElementById('modello'),
+          c = document.getElementById('capacita'),
+          col = document.getElementById('colore'),
+          p = document.getElementById('prezzo');
+    Object.keys(dati).forEach(model=>{
+      let o=document.createElement('option');o.value=model;o.textContent=model;m.append(o);
     });
-    // Handlers
-    modelloEl.addEventListener('change', () => {
-      capacitaEl.innerHTML = '<option value="">—</option>'; capacitaEl.disabled=true;
-      coloreEl.innerHTML = '<option value="">—</option>'; coloreEl.disabled=true;
-      prezzoEl.textContent='€0,00';
-      if(dati[modelloEl.value]){
-        Object.keys(dati[modelloEl.value]).forEach(c => {
-          const o = document.createElement('option'); o.value=c; o.textContent=c;
-          capacitaEl.appendChild(o);
+    m.onchange=()=>{
+      c.innerHTML='<option value="">Seleziona capacità</option>';c.disabled=true;
+      col.innerHTML='<option value="">Seleziona colore</option>';col.disabled=true;
+      p.textContent='€0,00';
+      if(dati[m.value]){
+        Object.keys(dati[m.value]).forEach(cap=>{
+          let o=document.createElement('option');o.value=cap;o.textContent=cap;c.append(o);
         });
-        capacitaEl.disabled=false;
+        c.disabled=false;
       }
-    });
-    capacitaEl.addEventListener('change', () => {
-      coloreEl.innerHTML = '<option value="">—</option>'; coloreEl.disabled=true;
-      prezzoEl.textContent='€0,00';
+    };
+    c.onchange=()=>{
+      col.innerHTML='<option value="">Seleziona colore</option>';col.disabled=true;p.textContent='€0,00';
       ['Space Gray','Silver','Gold','Black','White','Blue','Red','Green','Yellow','Coral']
-      .forEach(c => {
-        const o = document.createElement('option'); o.value=c; o.textContent=c;
-        coloreEl.appendChild(o);
-      });
-      coloreEl.disabled=false;
-    });
-    coloreEl.addEventListener('change', () => {
-      const base = dati[modelloEl.value][capacitaEl.value]||0;
-      prezzoEl.textContent='€'+base.toFixed(2).replace('.',',');
-      document.getElementById('hidden-modello').value=modelloEl.value;
-      document.getElementById('hidden-capacita').value=capacitaEl.value;
-      document.getElementById('hidden-colore').value=coloreEl.value;
+      .forEach(color=>{let o=document.createElement('option');o.value=color;o.textContent=color;col.append(o);});
+      col.disabled=false;
+    };
+    col.onchange=()=>{
+      let base=dati[m.value][c.value]||0;
+      p.textContent='€'+base.toFixed(2).replace('.',',');
+      document.getElementById('hidden-modello').value=m.value;
+      document.getElementById('hidden-capacita').value=c.value;
+      document.getElementById('hidden-colore').value=col.value;
       document.getElementById('hidden-prezzo').value=base.toFixed(2).replace('.',',');
-    });
+    };
   </script>
 </body>
 </html>
