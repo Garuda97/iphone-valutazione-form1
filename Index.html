@@ -171,157 +171,18 @@
           langSelect  = document.getElementById('langSelect'),
           langEls     = document.querySelectorAll('.lang');
 
-    // Dati completi
-    const dati = {
-      "iPhone XR": {
-  "64 GB":   {"Black":70,"White":70,"Blue":70,"Yellow":70,"Coral":70,"PRODUCT(RED)":70},
-  "128 GB":  {"Black":100,"White":100,"Blue":100,"Yellow":100,"Coral":100,"PRODUCT(RED)":100},
-  "256 GB":  {"Black":120,"White":120,"Blue":120,"Yellow":120,"Coral":120,"PRODUCT(RED)":120}
-},
-"iPhone XS": {
-  "64 GB":   {"Space Gray":80,"Silver":80,"Gold":80},
-  "256 GB":  {"Space Gray":100,"Silver":100,"Gold":100},
-  "512 GB":  {"Space Gray":130,"Silver":130,"Gold":130}
-},
-"iPhone XS Max": {
-  "64 GB":   {"Space Gray":95,"Silver":95,"Gold":95},
-  "256 GB":  {"Space Gray":115,"Silver":115,"Gold":115},
-  "512 GB":  {"Space Gray":135,"Silver":135,"Gold":135}
-},
-"iPhone 11": {
-  "64 GB":   {"Black":145,"White":145,"Green":145,"Yellow":145,"Purple":145,"PRODUCT(RED)":145},
-  "128 GB":  {"Black":175,"White":175,"Green":175,"Yellow":175,"Purple":175,"PRODUCT(RED)":175},
-  "256 GB":  {"Black":200,"White":200,"Green":200,"Yellow":200,"Purple":200,"PRODUCT(RED)":200}
-},
-"iPhone 11 Pro": {
-  "64 GB":   {"Midnight Green":160,"Space Gray":160,"Silver":160,"Gold":160},
-  "256 GB":  {"Midnight Green":225,"Space Gray":225,"Silver":225,"Gold":225},
-  "512 GB":  {"Midnight Green":270,"Space Gray":270,"Silver":270,"Gold":270}
-},
-"iPhone 11 Pro Max": {
-  "64 GB":   {"Midnight Green":185,"Space Gray":185,"Silver":185,"Gold":185},
-  "256 GB":  {"Midnight Green":235,"Space Gray":235,"Silver":235,"Gold":235},
-  "512 GB":  {"Midnight Green":275,"Space Gray":275,"Silver":275,"Gold":275}
-},
-"iPhone SE (2ª gen)": {
-  "64 GB":   {"Black":65,"White":65,"PRODUCT(RED)":65},
-  "128 GB":  {"Black":70,"White":70,"PRODUCT(RED)":70},
-  "256 GB":  {"Black":90,"White":90,"PRODUCT(RED)":90}
-},
-"iPhone SE (3ª gen)": {
-  "64 GB":   {"Midnight":150,"Starlight":150,"PRODUCT(RED)":150},
-  "128 GB":  {"Midnight":190,"Starlight":190,"PRODUCT(RED)":190},
-  "256 GB":  {"Midnight":220,"Starlight":220,"PRODUCT(RED)":220}
-},
-"iPhone 12": {
-  "64 GB":   {"Black":195,"White":195,"Green":195,"Blue":195,"Purple":195,"PRODUCT(RED)":195},
-  "128 GB":  {"Black":225,"White":225,"Green":225,"Blue":225,"Purple":225,"PRODUCT(RED)":225},
-  "256 GB":  {"Black":260,"White":260,"Green":260,"Blue":260,"Purple":260,"PRODUCT(RED)":260}
-},
-"iPhone 12 mini": {
-  "64 GB":   {"Black":130,"White":130,"Green":130,"Blue":130,"Purple":130,"PRODUCT(RED)":130},
-  "128 GB":  {"Black":170,"White":170,"Green":170,"Blue":170,"Purple":170,"PRODUCT(RED)":170},
-  "256 GB":  {"Black":195,"White":195,"Green":195,"Blue":195,"Purple":195,"PRODUCT(RED)":195}
-},
-"iPhone 12 Pro": {
-  "128 GB":  {"Graphite":245,"Silver":245,"Gold":245,"Pacific Blue":245},
-  "256 GB":  {"Graphite":275,"Silver":275,"Gold":275,"Pacific Blue":275},
-  "512 GB":  {"Graphite":295,"Silver":295,"Gold":295,"Pacific Blue":295}
-},
-"iPhone 12 Pro Max": {
-  "128 GB":  {"Graphite":310,"Silver":310,"Gold":310,"Pacific Blue":310},
-  "256 GB":  {"Graphite":340,"Silver":340,"Gold":340,"Pacific Blue":340},
-  "512 GB":  {"Graphite":350,"Silver":350,"Gold":350,"Pacific Blue":350}
-},
-"iPhone 13": {
-  "128 GB":  {"Midnight":260,"Starlight":260,"Pink":260,"Blue":260,"Green":260,"PRODUCT(RED)":260},
-  "256 GB":  {"Midnight":295,"Starlight":295,"Pink":295,"Blue":295,"Green":295,"PRODUCT(RED)":295},
-  "512 GB":  {"Midnight":350,"Starlight":350,"Pink":350,"Blue":350,"Green":350,"PRODUCT(RED)":350}
-},
-"iPhone 13 mini": {
-  "128 GB":  {"Midnight":230,"Starlight":230,"Pink":230,"Blue":230,"Green":230,"PRODUCT(RED)":230},
-  "256 GB":  {"Midnight":250,"Starlight":250,"Pink":250,"Blue":250,"Green":250,"PRODUCT(RED)":250},
-  "512 GB":  {"Midnight":290,"Starlight":290,"Pink":290,"Blue":290,"Green":290,"PRODUCT(RED)":290}
-},
-"iPhone 13 Pro": {
-  "128 GB":  {"Graphite":345,"Gold":345,"Silver":345,"Sierra Blue":345,"Alpine Green":345},
-  "256 GB":  {"Graphite":385,"Gold":385,"Silver":385,"Sierra Blue":385,"Alpine Green":385},
-  "512 GB":  {"Graphite":435,"Gold":435,"Silver":435,"Sierra Blue":435,"Alpine Green":435},
-  "1 TB":    {"Graphite":495,"Gold":495,"Silver":495,"Sierra Blue":495,"Alpine Green":495}
-},
-"iPhone 13 Pro Max": {
-  "128 GB":  {"Graphite":400,"Gold":400,"Silver":400,"Sierra Blue":400,"Alpine Green":400},
-  "256 GB":  {"Graphite":430,"Gold":430,"Silver":430,"Sierra Blue":430,"Alpine Green":430},
-  "512 GB":  {"Graphite":455,"Gold":455,"Silver":455,"Sierra Blue":455,"Alpine Green":455},
-  "1 TB":    {"Graphite":520,"Gold":520,"Silver":520,"Sierra Blue":520,"Alpine Green":520}
-},
-"iPhone 14": {
-  "128 GB":  {"Midnight":340,"Starlight":340,"Blue":340,"Purple":340,"Yellow":340,"PRODUCT(RED)":340},
-  "256 GB":  {"Midnight":390,"Starlight":390,"Blue":390,"Purple":390,"Yellow":390,"PRODUCT(RED)":390},
-  "512 GB":  {"Midnight":450,"Starlight":450,"Blue":450,"Purple":450,"Yellow":450,"PRODUCT(RED)":450}
-},
-"iPhone 14 Plus": {
-  "128 GB":  {"Midnight":360,"Starlight":360,"Blue":360,"Purple":360,"Yellow":360,"PRODUCT(RED)":360},
-  "256 GB":  {"Midnight":400,"Starlight":400,"Blue":400,"Purple":400,"Yellow":400,"PRODUCT(RED)":400},
-  "512 GB":  {"Midnight":460,"Starlight":460,"Blue":460,"Purple":460,"Yellow":460,"PRODUCT(RED)":460}
-},
-"iPhone 14 Pro": {
-  "128 GB":  {"Space Black":460,"Silver":460,"Gold":460,"Deep Purple":460},
-  "256 GB":  {"Space Black":500,"Silver":500,"Gold":500,"Deep Purple":500},
-  "512 GB":  {"Space Black":565,"Silver":565,"Gold":565,"Deep Purple":565},
-  "1 TB":    {"Space Black":600,"Silver":600,"Gold":600,"Deep Purple":600}
-},
-"iPhone 14 Pro Max": {
-  "128 GB":  {"Space Black":525,"Silver":525,"Gold":525,"Deep Purple":525},
-  "256 GB":  {"Space Black":565,"Silver":565,"Gold":565,"Deep Purple":565},
-  "512 GB":  {"Space Black":605,"Silver":605,"Gold":605,"Deep Purple":605},
-  "1 TB":    {"Space Black":655,"Silver":655,"Gold":655,"Deep Purple":655}
-},
-"iPhone 15": {
-  "128 GB":  {"Black":370,"Blue":370,"Green":370,"Pink":370,"Yellow":370},
-  "256 GB":  {"Black":450,"Blue":450,"Green":450,"Pink":450,"Yellow":450},
-  "512 GB":  {"Black":500,"Blue":500,"Green":500,"Pink":500,"Yellow":500}
-},
-"iPhone 15 Plus": {
-  "128 GB":  {"Black":430,"Blue":430,"Green":430,"Pink":430,"Yellow":430},
-  "256 GB":  {"Black":495,"Blue":495,"Green":495,"Pink":495,"Yellow":495},
-  "512 GB":  {"Black":570,"Blue":570,"Green":570,"Pink":570,"Yellow":570}
-},
-"iPhone 15 Pro": {
-  "128 GB":  {"Black Titanium":540,"White Titanium":540,"Blue Titanium":540,"Natural Titanium":540},
-  "256 GB":  {"Black Titanium":610,"White Titanium":610,"Blue Titanium":610,"Natural Titanium":610},
-  "512 GB":  {"Black Titanium":680,"White Titanium":680,"Blue Titanium":680,"Natural Titanium":680},
-  "1 TB":    {"Black Titanium":765,"White Titanium":765,"Blue Titanium":765,"Natural Titanium":765}
-},
-"iPhone 15 Pro Max": {
-  "256 GB":  {"Black Titanium":625,"White Titanium":625,"Blue Titanium":625,"Natural Titanium":625},
-  "512 GB":  {"Black Titanium":675,"White Titanium":675,"Blue Titanium":675,"Natural Titanium":675},
-  "1 TB":    {"Black Titanium":785,"White Titanium":785,"Blue Titanium":785,"Natural Titanium":785}
-},
-"iPhone 16": {
-  "128 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
-  "256 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
-  "512 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"}
-},
-"iPhone 16 Plus": {
-  "128 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
-  "256 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"},
-  "512 GB":  {"Black":"COMING SOON","White":"COMING SOON","Blue Ultramarine":"COMING SOON","Pink":"COMING SOON","Green Teal":"COMING SOON"}
-},
-"iPhone 16 Pro": {
-  "128 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
-  "256 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
-  "512 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
-  "1 TB":    {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"}
-},
-"iPhone 16 Pro Max": {
-  "256 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
-  "512 GB":  {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"},
-  "1 TB":    {"Black Titanium":"COMING SOON","White Titanium":"COMING SOON","Gold/Desert Titanium":"COMING SOON","Natural Titanium":"COMING SOON"}
-},
-    };
+  // Dati completi
+  let dati = {};
 
-    // Helper popolamento
+  fetch('prezzi.json')
+    .then(r => r.json())
+    .then(json => {
+      dati = json;
+      populateOptions(modelloEl, Object.keys(dati), 'Seleziona modello');
+    })
+    .catch(err => console.error('Errore caricamento dati', err));
+
+  // Helper popolamento
     function populateOptions(selectEl, items, placeholder) {
       selectEl.innerHTML = `<option value="">${placeholder}</option>`;
       items.forEach(val => selectEl.appendChild(new Option(val, val)));
@@ -338,7 +199,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       langSelect.value = 'it';
       langSelect.dispatchEvent(new Event('change'));
-      populateOptions(modelloEl, Object.keys(dati), 'Seleziona modello');
     });
 
     // Dropdown logic
