@@ -205,6 +205,13 @@
     // Dropdown logic
     modelloEl.addEventListener('change', () => {
       prezzoEl.textContent = '€0,00';
+      if (!modelloEl.value) {
+        capacitaEl.innerHTML = '<option value="">Seleziona capacità</option>';
+        capacitaEl.disabled = true;
+        coloreEl.innerHTML = '<option value="">Seleziona colore</option>';
+        coloreEl.disabled = true;
+        return;
+      }
       populateOptions(capacitaEl, Object.keys(dati[modelloEl.value]), 'Seleziona capacità');
       coloreEl.innerHTML = '<option value="">Seleziona colore</option>';
       coloreEl.disabled = true;
