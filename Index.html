@@ -115,7 +115,7 @@
         <span class="lang lang-fr">Date souhaitée</span>
         <span class="lang lang-zh">首选日期</span>
       </label>
-      <input type="date" id="date" name="date" required min="2025-07-25" max="2025-12-31">
+      <input type="date" id="date" name="date" required>
 
       <label for="time">
         <span class="lang lang-it">Ora preferita</span>
@@ -168,12 +168,15 @@
           capacitaEl  = document.getElementById('capacita'),
           coloreEl    = document.getElementById('colore'),
           prezzoEl    = document.getElementById('prezzo'),
+          dateEl      = document.getElementById('date'),
+          timeEl      = document.getElementById('time'),
           bookingForm = document.getElementById('bookingForm'),
           langSelect  = document.getElementById('langSelect'),
           langEls     = document.querySelectorAll('.lang');
 
   // Dati completi
   let dati = {};
+  let availability = {};
 
   fetch('prezzi.json')
     .then(r => r.json())
@@ -182,6 +185,53 @@
       populateOptions(modelloEl, Object.keys(dati), 'Seleziona modello');
     })
     .catch(err => console.error('Errore caricamento dati', err));
+
+  fetch('availability.json')
+    .then(r => r.json())
+    .then(json => {
+      availability = json;
+      initAvailability();
+    })
+    .catch(err => console.error('Errore caricamento disponibilità', err));
+
+  function initAvailability() {
+    const now = new Date();
+    const todayStr = now.toISOString().split('T')[0];
+    dateEl.min = todayStr;
+    if (availability.end_date) {
+      dateEl.max = availability.end_date;
+    }
+    updateTimeLimits(todayStr);
+  }
+
+  function updateTimeLimits(dateStr) {
+    const dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    const date = new Date(dateStr + 'T00:00');
+    const dayName = dayNames[date.getDay()];
+    const hours = availability.days ? availability.days[dayName] : null;
+    const closed = availability.closed_dates && availability.closed_dates.includes(dateStr);
+    if (!hours || closed) {
+      timeEl.value = '';
+      timeEl.min = '';
+      timeEl.max = '';
+      timeEl.disabled = true;
+      return;
+    }
+    timeEl.disabled = false;
+    let [start, end] = hours;
+    const now = new Date();
+    if (date.toDateString() === now.toDateString()) {
+      const oneHourLater = new Date(now.getTime() + 3600000);
+      const hhmm = oneHourLater.toISOString().substring(11,16);
+      if (hhmm > start) start = hhmm;
+    }
+    timeEl.min = start;
+    timeEl.max = end;
+  }
+
+  dateEl.addEventListener('change', () => {
+    if (dateEl.value) updateTimeLimits(dateEl.value);
+  });
 
   // Helper popolamento
     function populateOptions(selectEl, items, placeholder) {
