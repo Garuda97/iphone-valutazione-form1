@@ -1,6 +1,13 @@
 {
-  "start_date": "2025-07-25",
   "end_date": "2025-12-31",
-  "start_time": "09:00",
-  "end_time": "18:00"
+  "days": {
+    "monday": ["09:00", "18:00"],
+    "tuesday": ["09:00", "18:00"],
+    "wednesday": ["09:00", "18:00"],
+    "thursday": ["09:00", "18:00"],
+    "friday": ["09:00", "18:00"],
+    "saturday": ["10:00", "14:00"],
+    "sunday": null
+  },
+  "closed_dates": []
 }

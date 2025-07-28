@@ -190,12 +190,48 @@
     .then(r => r.json())
     .then(json => {
       availability = json;
-      dateEl.min = availability.start_date;
-      dateEl.max = availability.end_date;
-      timeEl.min = availability.start_time;
-      timeEl.max = availability.end_time;
+      initAvailability();
     })
     .catch(err => console.error('Errore caricamento disponibilità', err));
+
+  function initAvailability() {
+    const now = new Date();
+    const todayStr = now.toISOString().split('T')[0];
+    dateEl.min = todayStr;
+    if (availability.end_date) {
+      dateEl.max = availability.end_date;
+    }
+    updateTimeLimits(todayStr);
+  }
+
+  function updateTimeLimits(dateStr) {
+    const dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    const date = new Date(dateStr + 'T00:00');
+    const dayName = dayNames[date.getDay()];
+    const hours = availability.days ? availability.days[dayName] : null;
+    const closed = availability.closed_dates && availability.closed_dates.includes(dateStr);
+    if (!hours || closed) {
+      timeEl.value = '';
+      timeEl.min = '';
+      timeEl.max = '';
+      timeEl.disabled = true;
+      return;
+    }
+    timeEl.disabled = false;
+    let [start, end] = hours;
+    const now = new Date();
+    if (date.toDateString() === now.toDateString()) {
+      const oneHourLater = new Date(now.getTime() + 3600000);
+      const hhmm = oneHourLater.toISOString().substring(11,16);
+      if (hhmm > start) start = hhmm;
+    }
+    timeEl.min = start;
+    timeEl.max = end;
+  }
+
+  dateEl.addEventListener('change', () => {
+    if (dateEl.value) updateTimeLimits(dateEl.value);
+  });
 
   // Helper popolamento
     function populateOptions(selectEl, items, placeholder) {
