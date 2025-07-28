@@ -2,5 +2,10 @@
   "start_date": "2025-07-25",
   "end_date": "2025-12-31",
   "start_time": "09:00",
-  "end_time": "18:00"
+  "end_time": "18:00",
+  "days": {
+    "6": {"start_time": "10:00", "end_time": "14:00"},
+    "0": {"start_time": "10:00", "end_time": "16:00"}
+  },
+  "closed_dates": ["2025-08-15"]
 }

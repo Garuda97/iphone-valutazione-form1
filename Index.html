@@ -190,10 +190,12 @@
     .then(r => r.json())
     .then(json => {
       availability = json;
-      dateEl.min = availability.start_date;
+      const today = new Date().toISOString().split('T')[0];
+      dateEl.min = availability.start_date || today;
       dateEl.max = availability.end_date;
       timeEl.min = availability.start_time;
       timeEl.max = availability.end_time;
+      updateTimeLimits();
     })
     .catch(err => console.error('Errore caricamento disponibilità', err));
 
@@ -202,6 +204,41 @@
       selectEl.innerHTML = `<option value="">${placeholder}</option>`;
       items.forEach(val => selectEl.appendChild(new Option(val, val)));
       selectEl.disabled = false;
+    }
+
+    function updateTimeLimits() {
+      const date = dateEl.value;
+      if (!date) return;
+      if (availability.closed_dates && availability.closed_dates.includes(date)) {
+        timeEl.disabled = true;
+        timeEl.value = '';
+        return;
+      }
+      timeEl.disabled = false;
+
+      const day = new Date(date).getDay();
+      let min = availability.start_time;
+      let max = availability.end_time;
+
+      if (availability.days && availability.days[day]) {
+        const info = availability.days[day];
+        min = info.start_time || min;
+        max = info.end_time || max;
+      }
+
+      timeEl.min = min;
+      timeEl.max = max;
+
+      const today = new Date().toISOString().split('T')[0];
+      let defaultTime = min;
+      if (date === today) {
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+        defaultTime = now.toISOString().slice(11,16);
+        if (defaultTime < min) defaultTime = min;
+        if (defaultTime > max) defaultTime = max;
+      }
+      timeEl.value = defaultTime;
     }
 
     // Cambio lingua
@@ -214,7 +251,10 @@
     document.addEventListener('DOMContentLoaded', () => {
       langSelect.value = 'it';
       langSelect.dispatchEvent(new Event('change'));
+      updateTimeLimits();
     });
+
+    dateEl.addEventListener('change', updateTimeLimits);
 
     // Dropdown logic
     modelloEl.addEventListener('change', () => {
