@@ -177,6 +177,7 @@
   // Dati completi
   let dati = {};
   let availability = {};
+  let schedule = {};
 
   fetch('prezzi.json')
     .then(r => r.json())
@@ -190,12 +191,21 @@
     .then(r => r.json())
     .then(json => {
       availability = json;
-      dateEl.min = availability.start_date;
+      const today = new Date().toISOString().slice(0,10);
+      dateEl.min = availability.start_date > today ? availability.start_date : today;
       dateEl.max = availability.end_date;
       timeEl.min = availability.start_time;
       timeEl.max = availability.end_time;
     })
     .catch(err => console.error('Errore caricamento disponibilità', err));
+
+  fetch('schedule.json')
+    .then(r => r.json())
+    .then(json => {
+      schedule = json;
+      updateTimeLimits(dateEl.value || new Date().toISOString().slice(0, 10));
+    })
+    .catch(err => console.error('Errore caricamento orari', err));
 
   // Helper popolamento
     function populateOptions(selectEl, items, placeholder) {
@@ -204,17 +214,55 @@
       selectEl.disabled = false;
     }
 
+    function getScheduleForDate(dateStr) {
+      if (!schedule.weekly_hours) return null;
+      if (schedule.exceptions && dateStr in schedule.exceptions) {
+        return schedule.exceptions[dateStr];
+      }
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const dayName = days[new Date(dateStr).getDay()];
+      const hours = schedule.weekly_hours[dayName];
+      if (!hours) return null;
+      return hours;
+    }
+
+    function updateTimeLimits(dateStr) {
+      const hours = getScheduleForDate(dateStr);
+      if (!hours) {
+        timeEl.disabled = true;
+        timeEl.value = '';
+        timeEl.min = '';
+        timeEl.max = '';
+        return;
+      }
+      let [start, end] = hours;
+      const now = new Date();
+      const todayStr = now.toISOString().slice(0,10);
+      if (dateStr === todayStr) {
+        const plusHour = new Date(now.getTime() + 60*60*1000);
+        const nextTime = plusHour.toTimeString().slice(0,5);
+        if (nextTime > start) start = nextTime;
+      }
+      timeEl.disabled = false;
+      timeEl.min = start;
+      timeEl.max = end;
+      if (timeEl.value < start || timeEl.value > end) {
+        timeEl.value = '';
+      }
+    }
+
     // Cambio lingua
     langSelect.addEventListener('change', () => {
       const code = langSelect.value;
       langEls.forEach(el => el.style.display = el.classList.contains(`lang-${code}`) ? 'inline' : 'none');
     });
 
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
-      langSelect.value = 'it';
-      langSelect.dispatchEvent(new Event('change'));
-    });
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    langSelect.value = 'it';
+    langSelect.dispatchEvent(new Event('change'));
+    dateEl.addEventListener('change', () => updateTimeLimits(dateEl.value));
+  });
 
     // Dropdown logic
     modelloEl.addEventListener('change', () => {
