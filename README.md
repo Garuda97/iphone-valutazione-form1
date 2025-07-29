@@ -2,7 +2,8 @@
 
 This repository contains a simple valuation and appointment booking form.
 
-Previous versions of the form limited available dates and times using
-`availability.json` and `schedule.json`. These files have been removed and the
-booking fields are now unrestricted. Users can choose any date and time when
-submitting the form.
+Available booking dates and times are controlled by `schedule.json`. The
+calendar allows selection only within 2025 and 2026. Dates listed in the
+`closedDays` array are disabled and the `timeSlots` section defines the allowed
+time ranges for each weekday. Edit `schedule.json` to customise when the shop is
+open for appointments.
