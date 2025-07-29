@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valutazione e Prenotazione iPhone</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica+Neue:400,700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
     body { font-family: 'Helvetica Neue', Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
     .container { max-width:900px; margin:40px auto; padding:30px; background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
@@ -115,7 +117,7 @@
         <span class="lang lang-fr">Date souhaitée</span>
         <span class="lang lang-zh">首选日期</span>
       </label>
-      <input type="date" id="date" name="date" required>
+      <input type="text" id="date" name="date" required>
 
       <label for="time">
         <span class="lang lang-it">Ora preferita</span>
@@ -124,7 +126,7 @@
         <span class="lang lang-fr">Heure souhaitée</span>
         <span class="lang lang-zh">首选时间</span>
       </label>
-      <input type="time" id="time" name="time" required>
+      <select id="time" name="time" required></select>
 
       <label class="checkbox-label">
         <input type="checkbox" id="terms" name="terms" required>
@@ -164,7 +166,7 @@
 
   <script>
     // Riferimenti elementi
-    const modelloEl   = document.getElementById('modello'),
+  const modelloEl   = document.getElementById('modello'),
           capacitaEl  = document.getElementById('capacita'),
           coloreEl    = document.getElementById('colore'),
           prezzoEl    = document.getElementById('prezzo'),
@@ -176,6 +178,7 @@
 
   // Dati completi
   let dati = {};
+  let schedule = {};
 
   fetch('prezzi.json')
     .then(r => r.json())
@@ -185,6 +188,14 @@
     })
     .catch(err => console.error('Errore caricamento dati', err));
 
+  fetch('schedule.json')
+    .then(r => r.json())
+    .then(json => {
+      schedule = json;
+      initPickers();
+    })
+    .catch(err => console.error('Errore caricamento orari', err));
+
 
 
   // Helper popolamento
@@ -192,6 +203,64 @@
       selectEl.innerHTML = `<option value="">${placeholder}</option>`;
       items.forEach(val => selectEl.appendChild(new Option(val, val)));
       selectEl.disabled = false;
+    }
+
+    function timeToMin(t) {
+      const [h, m] = t.split(':').map(Number);
+      return h * 60 + m;
+    }
+
+    function minToTime(m) {
+      const h = String(Math.floor(m / 60)).padStart(2, '0');
+      const mm = String(m % 60).padStart(2, '0');
+      return `${h}:${mm}`;
+    }
+
+    function populateTimes(day) {
+      const slots = (schedule.timeSlots && schedule.timeSlots[day]) || [];
+      timeEl.innerHTML = '';
+      if (!slots.length) {
+        timeEl.disabled = true;
+        timeEl.innerHTML = '<option value="">Nessuna fascia disponibile</option>';
+        return;
+      }
+      const times = [];
+      slots.forEach(r => {
+        const [s, e] = r.split('-');
+        let cur = timeToMin(s);
+        const end = timeToMin(e);
+        while (cur < end) {
+          times.push(minToTime(cur));
+          cur += 30;
+        }
+      });
+      times.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        timeEl.appendChild(opt);
+      });
+      timeEl.disabled = false;
+    }
+
+    function initPickers() {
+      const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      flatpickr(dateEl, {
+        dateFormat: 'Y-m-d',
+        minDate: '2025-01-01',
+        maxDate: '2026-12-31',
+        disable: (schedule.closedDays || []).concat([
+          date => {
+            const d = weekdays[date.getDay()];
+            return !schedule.timeSlots[d] || schedule.timeSlots[d].length === 0;
+          }
+        ]),
+        onChange: (sel) => {
+          const day = weekdays[sel[0].getDay()];
+          populateTimes(day);
+        }
+      });
+      dateEl.readOnly = true;
     }
 
 
